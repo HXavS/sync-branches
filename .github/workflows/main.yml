@@ -10,15 +10,16 @@ jobs:
     name: Syncing branches
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: 12
-      - name: Opening pull request
-        id: pull
+          node-version: 16
+      - name: Sync Branches Enhanced
+        id: branch-sync
         uses: ./
         with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.LOCAL_TOKEN }}
           FROM_BRANCH: "main"
           TO_BRANCH: "develop"
+          PULL_REQUEST_AUTO_MERGE_METHOD: "merge"
